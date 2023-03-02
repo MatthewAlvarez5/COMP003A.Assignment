@@ -1,4 +1,4 @@
-﻿namespace COMP003A.Assignment
+﻿namespace COMP003A.Assignment7
 {
     internal class Program
     {
