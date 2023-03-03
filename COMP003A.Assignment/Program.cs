@@ -1,4 +1,10 @@
-﻿namespace COMP003A.Assignment7
+﻿/*
+ * Author: Matthew Alvarez
+ * Course: COMP-003A
+ * Purpose: Array and List Assignment
+ */
+
+namespace COMP003A.Assignment7
 {
     internal class Program
     {
@@ -8,16 +14,12 @@
 
             Console.Write("Please Enter a Letter: ");
             char characterInput = Convert.ToChar(Console.ReadLine());
-    
-            
             Console.Write("Please Enter a Word: ");
             string wordInput = Convert.ToString(Console.ReadLine());
           
-            
             int letterCount = characterCounter(characterInput, wordInput);
             
-            /* if statements for grammar purposes */
-            if (letterCount > 1)
+            if (letterCount > 1)    //if statements for grammar purposes
             {
                 Console.WriteLine($"There are {letterCount} {characterInput}'s in \"{wordInput}\"");
             }
@@ -30,12 +32,51 @@
                 Console.WriteLine($"There are no {characterInput}'s in \"{wordInput}\"");
             }
 
+            /* isPalindrome section */
             printSeparator("Array - IsPalindrome"); //Section Title
 
             Console.Write("Enter a word: ");
             string palindromeInput = Convert.ToString(Console.ReadLine());
-            bool palindrome = IsPalindrome(palindromeInput);
-            Console.WriteLine($"(T/F) The word {palindromeInput} is a palindrome: {palindrome}");
+            bool palindrome = isPalindrome(palindromeInput);
+            if (palindrome == true) //grammar if-statements
+            {
+                Console.WriteLine($"The word \"{palindromeInput}\" is a palindrome");
+            }
+            else
+            {
+                Console.WriteLine($"The word \"{palindromeInput}\" is NOT a palindrome");
+            }
+
+            /* list add section */
+            printSeparator("List - Add"); //Section Title
+
+            List<string> names = new List<string>();
+            char userInput = default;
+            string nameInput;
+            bool end;
+
+            do
+            {
+                Console.Write("Please enter a name: ");
+                nameInput = Convert.ToString(Console.ReadLine());
+                names.Add(nameInput);
+                Console.Write("Press any key to continue adding names or press (e) to exit: ");
+                userInput = Convert.ToChar(Console.ReadLine());
+                userInput = char.ToLower(userInput);
+                if (userInput=='e')
+                {
+                    break;
+                }
+            } while(true); /* while (userInput != 'e'); ---> wouldn't exit loop for some reason */
+
+            /* list traversal section */
+            printSeparator("List - Traversal"); //Section Title
+            traverseList(names);
+
+            /* list reverse traversal section */
+            printSeparator("List - Reverse Traversal"); //Section Title
+            traverseListReverse(names);
+
         }
 
 
@@ -78,7 +119,7 @@
         /// </summary>
         /// <param name="wordInput">String Input</param>
         /// <returns></returns>
-        static bool IsPalindrome(string wordInput)
+        static bool isPalindrome(string wordInput)
         {
             wordInput = wordInput.ToLower();
             char[] characterArray = wordInput.ToCharArray();
@@ -88,10 +129,28 @@
             return reverseWord==wordInput;
         }
 
-        static void TraverseList(List<string>list)
+        /// <summary>
+        /// Method to Traverse Given list
+        /// </summary>
+        /// <param name="list">String list input</param>
+        static void traverseList(List<string>list)
         {
-
+            foreach (var item in list) 
+            { 
+                Console.WriteLine(item);
+            }
         }
-
+        /// <summary>
+        /// Method Traverses Given list in reverse
+        /// </summary>
+        /// <param name="list"></param>
+        static void traverseListReverse(List<string>list)
+        {
+            list.Reverse();
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+        }
     }
 }
